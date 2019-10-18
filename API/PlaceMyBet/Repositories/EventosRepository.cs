@@ -10,7 +10,8 @@ namespace PlaceMyBet.Repositories {
         internal Evento[] RetrieveAll() {
             MySqlConnection con = Database.GetConnection();
             MySqlCommand command = con.CreateCommand();
-            command.CommandText = "Select * from evento";
+            command.CommandText = "select idEvento, fechaEvento, e1.Nombre as nomLocal, e2.Nombre as nomVisitante from evento," +
+                " equipo e1, equipo e2 where evento.idLocal = e1.idEquipo and evento.idVisitante = e2.idEquipo;";
 
             con.Open();
             MySqlDataReader reader = command.ExecuteReader();
@@ -18,7 +19,7 @@ namespace PlaceMyBet.Repositories {
             
             while (reader.Read()) {
                 resultado.Add(new Evento(reader.GetInt32("idEvento"), reader.GetDateTime("fechaEvento"),
-                    reader.GetInt32("idLocal"), reader.GetInt32("idVisitante")));
+                    reader.GetString("nomLocal"), reader.GetString("nomVisitante")));
             }
             con.Close();
             return resultado.ToArray();

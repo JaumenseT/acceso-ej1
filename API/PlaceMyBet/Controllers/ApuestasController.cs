@@ -25,8 +25,16 @@ namespace PlaceMyBet.Controllers
         }
 
         // POST: api/Apuestas
-        public void Post([FromBody]string value)
+        public string Post([FromBody]Apuesta a)
         {
+            ApuestasRepository rep = new ApuestasRepository();
+            MercadosRepository repMer = new MercadosRepository();
+            Mercado mer = repMer.Retrieve(a.IdMercado);
+            a.Cuota = a.TipoApuesta == 'A' ? mer.CuotaOver : mer.CuotaUnder;
+            mer.RecalculaCuotas(a.TipoApuesta, a.DineroApostado);
+            repMer.Save(mer);
+            rep.Save(a);
+            return "OK";
         }
 
         // PUT: api/Apuestas/5
