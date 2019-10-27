@@ -18,11 +18,12 @@ namespace PlaceMyBet.Controllers
             return rep.RetrieveAll();
         }
 
-        // GET: api/Mercados/5
-        public string Get(int id)
-        {
-            return "value";
+        public IEnumerable<Mercado> Get(int id) {
+            MercadosRepository rep = new MercadosRepository();
+            return rep.RetrieveByEvento(id);
         }
+
+        
 
         // POST: api/Mercados
         public void Post([FromBody]string value)

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace PlaceMyBet.Models {
     public class Apuesta {
-        public Apuesta(int idApuesta, char tipoApuesta, double cuota, double dineroApostado, int idMercado, int idUsuario, double tipoMercado, string emailUsuario)
+        public Apuesta(int idApuesta, char tipoApuesta, double cuota, double dineroApostado, int idMercado, int idUsuario, double tipoMercado, string emailUsuario, int idEvento)
         {
             this.IdApuesta = idApuesta;
             this.TipoApuesta = tipoApuesta;
@@ -14,7 +14,8 @@ namespace PlaceMyBet.Models {
             this.IdMercado = idMercado;
             this.IdUsuario = idUsuario;
             this.TipoMercado = tipoMercado;
-            this.emailUsuario = emailUsuario;
+            this.EmailUsuario = emailUsuario;
+            this.IdEvento = idEvento;
         }
 
         public int IdApuesta { get; set; }
@@ -24,6 +25,7 @@ namespace PlaceMyBet.Models {
         public int IdMercado { get; set; }
         public int IdUsuario { get; set; }
         public double TipoMercado { get; set; }
-        public string emailUsuario { get; set; }
+        public string EmailUsuario { get; set; }
+        public int IdEvento { get; set; }
     }
 }

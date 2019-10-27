@@ -26,6 +26,22 @@ namespace PlaceMyBet.Repositories {
             return resultado.ToArray();
         }
 
+        internal IEnumerable<Mercado> RetrieveByEvento(int id) {
+            MySqlConnection con = Database.GetConnection();
+            MySqlCommand command = con.CreateCommand();
+            command.CommandText = "Select * from mercado where idEvento="+id+" order by idMercado";
+
+            con.Open();
+            MySqlDataReader reader = command.ExecuteReader();
+            List<Mercado> resultado = new List<Mercado>();
+
+            while (reader.Read()) {
+                resultado.Add(Read(reader));
+            }
+            con.Close();
+            return resultado.ToArray();
+        }
+
         internal Mercado Retrieve(int idMercado) {
             MySqlConnection con = Database.GetConnection();
             MySqlCommand command = con.CreateCommand();

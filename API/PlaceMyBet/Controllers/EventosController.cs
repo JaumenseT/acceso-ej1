@@ -24,6 +24,8 @@ namespace PlaceMyBet.Controllers
             return "value";
         }
 
+        // GET: api/Eventos/5/Mercados
+
         // POST: api/Eventos
         public void Post([FromBody]string value)
         {
